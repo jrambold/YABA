@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YABA</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+    <nav class="nav-bar">
+      <% if current_user  %>
+        <div class="nav-center">
+            <p><%= link_to "Logged in as:", blog_show_path(current_user.blog) %>
+            <%= link_to current_user.username, blog_show_path(current_user.blog) %></p>
+        </div>
+        <div class="nav-right">
+          <p><%= link_to 'Logout', logout_path, class: "button" %></p>
+        </div>
+      <% else %>
+        <div class="nav-center">
+          <p><%= link_to 'Login', login_path %></p>
+        </div>
+        <div class="nav-right">
+          <p><%= link_to 'CreateAccount', new_user_path, class: "button" %></p>
+        </div>
+      <% end %>
+    </nav>
+
+    <%= yield %>
+  </body>
+</html>
